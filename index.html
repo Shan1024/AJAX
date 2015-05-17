@@ -19,6 +19,21 @@
         <!-- <li>Snow Bear</li> -->
       </ul>
 
+      <template id="bear-template">
+        <li data-id = "{{_id}}">
+          <p>
+            Name:
+            <span class = "noedit name">{{name}}</span>
+            <input class = "edit name"/>
+          </p>
+          <button data-id='{{_id}}' class='remove'>X</button>
+          <button class='editBear noedit'>Edit</button>
+          <button class='saveEdit edit'>Save</button>
+          <button class='cancelEdit edit'>Cancel</button>
+
+        </li>
+      </template>
+
       <h4>Add a new bear</h4>
 
       <p>Name: <input type="text" id="name"></p>
@@ -27,6 +42,7 @@
       <script src="/scripts/jquery.min.js"></script>
       <script src="/scripts/main.js"></script>
       <script src="/scripts/mustache.js"></script>
+
     </div>
 
   </body>
