@@ -3,14 +3,19 @@ $(function(){
   var $bearsList = $('#bears');
   var $name = $('#name');
 
+  var orderTemplate = "<li>"+
+  "Name: {{name}}"+
+  "<button data-id='{{_id}}' class='remove'>X</button>"+
+  "</li>";
+
   $.ajax ({
     type: 'GET',
     url: '/api/bears',
     success: function(bears){
       console.log('success', bears);
       $.each(bears, function(i, bear){
-        // console.log('name', bear.name);
-        $bearsList.append('<li>Name: '+bear.name+'</li>');
+        console.log('name', bear);
+        $bearsList.append(Mustache.render(orderTemplate, bear));
       });
     },
     error: function(){
@@ -36,6 +41,23 @@ $(function(){
       },
       error: function(){
         alert('Error saving bear');
+      }
+    });
+
+  });
+
+  $bearsList.delegate('.remove', 'click', function(){
+
+    var $li = $(this).closest('li');
+
+    $.ajax({
+      type: 'DELETE',
+      url: 'api/bears/'+$(this).attr('data-id'),
+      success: function(){
+        $li.remove();
+      },
+      error: function(){
+
       }
     });
 
